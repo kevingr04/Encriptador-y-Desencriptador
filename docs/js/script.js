@@ -187,9 +187,15 @@ function createOptions() {
     lastResult[lastResult.length - 1].select();
     document.execCommand("selectAll");
     document.execCommand("copy");
-    setTimeout(function () {
-      document.execCommand("unSelect");
-    }, 2000);
+    try {
+      swal({
+        title: "Exito",
+        text: "Texto copiado correctamente",
+        icon: "success",
+      });
+    } catch {
+      alert("Texto copiado correctamente");
+    }
   }); // Finalizan las opciones del boton
   containerOptions.appendChild(btnCopyLast);
   confirmationButton = true;
