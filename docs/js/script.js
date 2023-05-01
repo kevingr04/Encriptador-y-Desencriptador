@@ -172,6 +172,7 @@ function createOptions() {
     containerResult.appendChild(imageResultNull);
     containerResult.appendChild(pNullOne);
     containerResult.appendChild(pNullTwo);
+    loadImageNoResult();
     emptyResults = true;
     confirmationButton = false;
   }); // Finalizan las opciones del boton
