@@ -6,7 +6,7 @@ const encryptData = { a: "ai", e: "enter", i: "imes", o: "ober", u: "ufat" };
 const decryptData = Array("ai", "enter", "imes", "ober", "ufat");
 const vocalsData = Array("a", "e", "i", "o", "u");
 let textEncryptedData = Array();
-let countEncryptedData = 0;
+let countEncryptedData = -1;
 const containerResult = document.getElementById("containerResult");
 const containerOptions = document.getElementById("containerOptions");
 let confirmationButton = false;
@@ -47,28 +47,28 @@ function encriptText() {
 
 //Desencriptar texto
 function decryptText() {
-  let resultDecrypt = textInput.value;
-  let previousText = textInput.value;
-  textInput.value = textInput.value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-  textInput.value = textInput.value.toLocaleLowerCase();
-  if (previousText != textInput.value) {
-    try {
-      swal({
-        title: "Advertencia",
-        text: "Se ha realizado una conversión del texto!",
-        icon: "info",
-      });
-    } catch {
-      alert("Se ha realizado una conversión del texto");
+    let resultDecrypt = textInput.value;
+    let previousText = textInput.value;
+    textInput.value = textInput.value
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+    textInput.value = textInput.value.toLocaleLowerCase();
+    if (previousText != textInput.value) {
+      try {
+        swal({
+          title: "Advertencia",
+          text: "Se ha realizado una conversión del texto!",
+          icon: "info",
+        });
+      } catch {
+        alert("Se ha realizado una conversión del texto");
+      }
     }
-  }
-  textInput.value = textInput.value.trim();
-  for (i = 0; i < 5; i++) {
-    resultDecrypt = resultDecrypt.replaceAll(decryptData[i], vocalsData[i]);
-  }
-  addElements(resultDecrypt);
+    textInput.value = textInput.value.trim();
+    for (i = 0; i < 5; i++) {
+      resultDecrypt = resultDecrypt.replaceAll(decryptData[i], vocalsData[i]);
+    }
+    addElements(resultDecrypt);
 }
 
 //Condición para agregar elementos de resultados
@@ -106,10 +106,10 @@ function addElements(dataResult) {
         containerResult.removeChild(containerResult.firstChild);
       }
     }
-    if (countEncryptedData < 5) {
+    if (countEncryptedData < 4) {
+      countEncryptedData++;
       textEncryptedData[countEncryptedData] = dataResult;
       elementsResults(textEncryptedData, countEncryptedData);
-      countEncryptedData++;
     } else {
       countEncryptedData = 0;
       textEncryptedData[countEncryptedData] = dataResult;
